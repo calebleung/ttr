@@ -1,0 +1,28 @@
+<html lang="en">
+    <head>
+        <title>Takeout Text Reader</title>
+        <link rel='stylesheet' type='text/css' href='./style.css' media='all'/>
+    </head>
+    <body>
+        <div id='container'>
+            <div id='phone_top'>
+                <select name='contacts_dropdown' id='contacts'>
+                    <option id='contact_placeholder'>Waiting for contacts...</option>
+                </select>
+            </div>
+            <div id='phone_content'>
+            </div>
+            <div id='phone_bottom'>
+                <input type='file' id='files' name='files[]' multiple webkitdirectory=''/>
+            </div>
+        </div>
+        
+        <p id='info'></p>
+
+        <script type='text/javascript' src='./sms_loading.js'></script>
+        <script type='text/javascript' src='./populate_ui.js'></script>
+        <script>
+            document.getElementById('files').addEventListener('change', initialize_sms_load, false);
+        </script>
+    </body>
+</html>
