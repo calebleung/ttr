@@ -22,6 +22,16 @@
     -moz-border-radius   : 10px 10px 0px 0px;
     -webkit-border-radius: 10px 10px 0px 0px; 
     border               : 10px solid #000000;
+
+}
+
+#phone_bottom_restart_control {
+    width: auto;
+}
+
+#phone_bottom_message_control {
+    width: auto;
+    //margin-left: auto;
 }
 
 #phone_content {
@@ -36,6 +46,9 @@
 
 #phone_bottom {
     width: 100%;
+    
+    background: #000000;
+    color: #ffffff;
 
     border-radius        : 0px 0px 10px 10px; 
     -moz-border-radius   : 0px 0px 10px 10px; 

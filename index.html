@@ -6,9 +6,12 @@
     <body>
         <div id='container'>
             <div id='phone_top'>
-                <select name='contacts_dropdown' id='contacts'>
-                    <option id='contact_placeholder'>Waiting for contacts...</option>
-                </select>
+                <div id='phone_top_contacts_dropdown'>
+                    <select name='contacts_dropdown' id='contacts'>
+                        <option id='contact_placeholder'>Waiting for contacts...</option>
+                    </select>
+                </div>
+
             </div>
             <div id='phone_content'>
                 <div id='phone_intro'>
@@ -20,7 +23,13 @@
                 </div>
             </div>
             <div id='phone_bottom'>
-                
+                <div id='phone_bottom_restart_control'>
+                    <a id='phone_restart'>Back</a>
+                </div>
+                <div id='phone_bottom_message_control'>
+                    <a id='messages_top'>First message</a>
+                    <a id='messages_bottom'>Last message</a>
+                </div>
             </div>
         </div>
         
