@@ -7,7 +7,7 @@ function get_sms_files( files ) {
         }
     }
 
-    document.getElementById('info').innerHTML = 'There are ' + sms_files.length + ' conversations.';
+    document.getElementById('loader_info').innerHTML = 'Conversations loaded. Use the dropdown to select a contact.';
 
     return sms_files;
 }

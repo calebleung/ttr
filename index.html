@@ -11,14 +11,19 @@
                 </select>
             </div>
             <div id='phone_content'>
+                <div id='phone_intro'>
+                    <h1>Takeout Text Reader</h1>
+                    <p>TTR allows you to easily view texts that were exported via Google's Takeout service.</p>
+                    <p>Please select a folder or files you wish to view.</p>
+                    <input type='file' id='files' name='files[]' multiple webkitdirectory=''/>
+                    <p id='loader_info'></p>
+                </div>
             </div>
             <div id='phone_bottom'>
-                <input type='file' id='files' name='files[]' multiple webkitdirectory=''/>
+                
             </div>
         </div>
         
-        <p id='info'></p>
-
         <script type='text/javascript' src='./sms_loading.js'></script>
         <script type='text/javascript' src='./populate_ui.js'></script>
         <script>
