@@ -101,7 +101,7 @@ function get_participants( html_document ) {
     for ( var i = 0; i < participants_raw.length; i++ ) {
         var phone = participants_raw[i].getElementsByTagName('a')[0].href.substring(5);
 
-        participants.push( {'name': participants_raw[i].innerText, 'phone': phone} );
+        participants.push( {'name': participants_raw[i].textContent, 'phone': phone} );
     }
 
     return participants;
