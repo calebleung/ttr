@@ -1,82 +1,85 @@
 function get_sms_files( files ) {
-    var sms_files = [];
+    var smsFiles = [];
 
     for ( var i = 0; i < files.length; i++ ) {
         if ( files[i].name.indexOf('- Text -') > 0 && files[i].type.indexOf('html') > 0 ) {
-            sms_files.push( files[i] );
+            smsFiles.push( files[i] );
         }
     }
 
     document.getElementById('loader_info').innerHTML = 'Conversations loaded. Use the dropdown to select a contact.';
 
-    return sms_files;
+    return smsFiles;
 }
 
-function parse_all_sms_data( sms_files ) {
-    var sms_filename_meta = [];
+function parse_all_sms_data( smsFiles ) {
+    var smsFilenameMetadata = [];
 
-    var sms_count           = 0;
-    var file_reader_counter = 1;
+    var smsCount           = 0;
+    var fileReaderCounter  = 1;
 
-    var all_conversations = {};
+    var allConversations = {};
 
-    for ( var i = 0; i < sms_files.length; i++ ) {
-        var file_reader = new FileReader();
+    for ( var i = 0; i < smsFiles.length; i++ ) {
+        var fileReader = new FileReader();
 
-        sms_filename_meta.push( get_metadata_from_filename( sms_files[i].name ) );
+        smsFilenameMetadata.push( get_metadata_from_filename( smsFiles[i].name ) );
 
-        file_reader.onloadend = function(event) {
+        fileReader.onloadend = function(event) {
             if ( event.target.readyState == FileReader.DONE ) {
-                var is_ongoing_conversation = false;
-                var participants            = [];
+                var isOngoingConversation = false;
 
-                var sms_data = sms_as_html( event.target.result );
+                var participants = [];
+                var messages     = [];
+                var times        = [];
 
-                sms_filename_author    = sms_filename_meta[0].name;
-                sms_filename_timestamp = sms_filename_meta[0].timestamp;
+                var smsData = sms_as_html( event.target.result );
 
-                sms_filename_meta.shift();
+                var smsFilenameAuthor    = smsFilenameMetadata[0].name;
+                //smsFilenameTimestamp = smsFilenameMetadata[0].timestamp;
 
-                participants = get_participants(sms_data);
-                messages     = get_messages(sms_data);
-                times        = get_times(sms_data);
+                smsFilenameMetadata.shift();
 
-                is_ongoing_conversation = existing_participant( sms_filename_author, participants, all_conversations );
+                participants = get_participants( smsData );
+                messages     = get_messages( smsData );
+                times        = get_times( smsData );
 
-                if ( is_ongoing_conversation ) {
-                    all_conversations[sms_filename_author] = add_messages_to_conversation( all_conversations[sms_filename_author], participants, messages, times );
+                isOngoingConversation = existing_participant( smsFilenameAuthor, participants, allConversations );
+
+                if ( isOngoingConversation ) {
+                    allConversations[smsFilenameAuthor] = add_messages_to_conversation( allConversations[smsFilenameAuthor], participants, messages, times );
                 }
                 else {
-                    all_conversations[sms_filename_author] = create_conversation( participants, messages, times );
+                    allConversations[smsFilenameAuthor] = create_conversation( participants, messages, times );
                 }
 
-                if ( file_reader_counter < sms_count ) {
-                    file_reader_counter++;
+                if ( fileReaderCounter < smsCount ) {
+                    fileReaderCounter++;
                 }
                 else {
-                    initialize_populate_ui(all_conversations);
+                    initialize_populate_ui(allConversations);
                 }
             }
         }
 
-        sms_count = sms_filename_meta.length;
+        smsCount = smsFilenameMetadata.length;
 
-        var sms = file_reader.readAsText( sms_files[i] );
+        var sms = fileReader.readAsText( smsFiles[i] );
     }
 }
 
-function existing_participant( author, participants, all_conversations ) {
+function existing_participant( author, participants, allConversations ) {
     // Check if there is an existing key. 
     // If not, check if the existing participant has the same phone numbefr.
 
-    var possible_participant = Object.keys(all_conversations).indexOf(author);
+    var possibleParticipant = Object.keys(allConversations).indexOf(author);
 
-    if ( possible_participant == -1 ) {
+    if ( possibleParticipant == -1 ) {
         return false;
     }
     else {
         for ( var i = 0; i < participants.length; i++ ) {
-            if ( participants[i].phone == all_conversations[author].phone ) {
+            if ( participants[i].phone == allConversations[author].phone ) {
                 return true;
             }
         }
@@ -85,12 +88,12 @@ function existing_participant( author, participants, all_conversations ) {
     return true;
 }
 
-function sms_as_html( html_content ) {
-    var html_document = document.createElement('html');
+function sms_as_html( htmlContent ) {
+    var htmlDocument = document.createElement('html');
 
-    html_document.innerHTML = html_content;
+    htmlDocument.innerHTML = htmlContent;
 
-    return html_document;
+    return htmlDocument;
 }
 
 function get_participants( html_document ) {
