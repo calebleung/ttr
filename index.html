@@ -14,29 +14,30 @@
 
             </div>
             <div id='phone_content'>
-                <div id='phone_intro'>
-                    <h1>Takeout Text Reader</h1>
-                    <p>TTR allows you to easily view texts that were exported via Google's Takeout service.</p>
-                    <p>Please select a folder or files you wish to view.</p>
-                    <input type='file' id='files' name='files[]' multiple webkitdirectory=''/>
-                    <p id='loader_info'></p>
-                </div>
             </div>
             <div id='phone_bottom'>
                 <div id='phone_bottom_restart_control' class='phone_bottom_controls'>
-                    <a id='phone_restart' title='Back to file/folder selection'>&#x21BC;</a>
+                    <a id='phone_control_restart' title='Back to file/folder selection'>&#x21BC;</a>
                 </div>
                 <div id='phone_bottom_message_control' class='phone_bottom_controls'>
-                    <a id='messages_top' title='To first message'>&#x2191;</a>
-                    <a id='messages_bottom' title='To last message'>&#x2193;</a>
+                    <a id='messages_to_top' title='To first message'>&#x2191;</a>
+                    <a id='messages_to_bottom' title='To last message'>&#x2193;</a>
                 </div>
+            </div>
+        </div>
+        
+        <div id='placeholder'>
+            <div id='phone_intro'>
+                <h1>Takeout Text Reader</h1>
+                <p>TTR allows you to easily view texts that were exported via Google's Takeout service.</p>
+                <p>Please select a folder or files you wish to view.</p>
+                <input type='file' id='files' name='files[]' multiple webkitdirectory=''/>
+                <p id='loader_info'></p>
             </div>
         </div>
         
         <script type='text/javascript' src='./sms_loading.js'></script>
         <script type='text/javascript' src='./populate_ui.js'></script>
-        <script>
-            document.getElementById('files').addEventListener('change', initializeSmsLoad, false);
-        </script>
+        <script type='text/javascript' src='./init.js'></script>
     </body>
 </html>

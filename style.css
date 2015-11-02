@@ -1,3 +1,6 @@
+#placeholder {
+    display: none;
+}
 #container {
     position: absolute;
     left    : 35%;

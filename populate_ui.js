@@ -69,6 +69,21 @@ function populateMessages() {
     document.getElementById('phone_content').scrollTop = document.getElementById('phone_content').scrollHeight;
 }
 
+function moveConversation( event ) {
+    if ( document.getElementById('phone_content').getElementsByTagName('div')[0].id == 'phone_intro' ) {
+        document.getElementById('loader_info').innerHTML = 'Select a conversation before attempting to navigate it.'
+        
+        return false;
+    }
+    
+    if ( event.target.id.indexOf('top') > -1 ) {
+        document.getElementById('phone_content').scrollTop = 0;
+    }
+    else {
+        document.getElementById('phone_content').scrollTop = document.getElementById('phone_content').scrollHeight;
+    }
+}
+
 function initializePopulateUi( allConversations ) {
     populateDropdown( Object.keys(allConversations) );
 
