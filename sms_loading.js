@@ -3,7 +3,7 @@ function getSmsFiles( files ) {
 
     for ( var i = 0; i < files.length; i++ ) {
         if ( files[i].name.indexOf('- Text -') > 0 && files[i].type.indexOf('html') > 0 ) {
-            smsFiles.push( files[i] );
+            smsFiles.push(files[i]);
         }
     }
 
@@ -23,7 +23,7 @@ function parseAllSmsData( smsFiles ) {
     for ( var i = 0; i < smsFiles.length; i++ ) {
         var fileReader = new FileReader();
 
-        smsFilenameMetadata.push( getMetadataFromFilename( smsFiles[i].name ) );
+        smsFilenameMetadata.push( getMetadataFromFilename(smsFiles[i].name) );
 
         fileReader.onloadend = function(event) {
             if ( event.target.readyState == FileReader.DONE ) {
@@ -33,16 +33,16 @@ function parseAllSmsData( smsFiles ) {
                 var messages     = [];
                 var times        = [];
 
-                var smsData = smsAsHtml( event.target.result );
+                var smsData = smsAsHtml(event.target.result);
 
                 var smsFilenameAuthor    = smsFilenameMetadata[0].name;
                 //smsFilenameTimestamp = smsFilenameMetadata[0].timestamp;
 
                 smsFilenameMetadata.shift();
 
-                participants = getParticipants( smsData );
-                messages     = getMessages( smsData );
-                times        = getTimes( smsData );
+                participants = getParticipants(smsData);
+                messages     = getMessages(smsData);
+                times        = getTimes(smsData);
 
                 isOngoingConversation = existingParticipant( smsFilenameAuthor, participants, allConversations );
 
@@ -64,7 +64,7 @@ function parseAllSmsData( smsFiles ) {
 
         smsCount = smsFilenameMetadata.length;
 
-        var sms = fileReader.readAsText( smsFiles[i] );
+        var sms = fileReader.readAsText(smsFiles[i]);
     }
 }
 
