@@ -1,59 +1,59 @@
 var TWENTY_FOUR_HOURS_IN_MS = 86400000;
 
-function populate_dropdown( contact_names ) {
+function populateDropdown( contactNames ) {
     document.getElementById('contact_placeholder').innerHTML = 'Choose a contact...';
     
-    for ( var i = 0; i < contact_names.length; i++ ) {
-        var option_tag = document.createElement('option');
+    for ( var i = 0; i < contactNames.length; i++ ) {
+        var optionTag = document.createElement('option');
         
-        option_tag.setAttribute( 'id',    contact_names[i] );
-        option_tag.setAttribute( 'value', contact_names[i] );
+        optionTag.setAttribute( 'id',    contactNames[i] );
+        optionTag.setAttribute( 'value', contactNames[i] );
 
-        option_tag.innerHTML = contact_names[i];
+        optionTag.innerHTML = contactNames[i];
 
-        document.getElementById('contacts').appendChild(option_tag);
+        document.getElementById('contacts').appendChild(optionTag);
     }
 }
 
-function new_conversation( all_conversations, event ) {
+function newConversation( allConversations, event ) {
     document.getElementById('phone_content').innerHTML = '';
     
-    load_conversation( all_conversations, event.target.value );
+    loadConversation( allConversations, event.target.value );
 }
 
-function load_conversation( all_conversations, contact_name ) {
-    var messages = all_conversations[contact_name].messages;
+function loadConversation( allConversations, contactName ) {
+    var messages = allConversations[contactName].messages;
     
     for ( var i = 0; i < messages.length; i++ ) {
-        var message_class_type = 'message_from_you';
-        var div_tag            = document.createElement('div');
+        var messageClassType = 'message_from_you';
+        var divTag           = document.createElement('div');
         
         if ( messages[i].type == 1 ) {
-            message_class_type = 'message_to_you';
+            messageClassType = 'message_to_you';
         }
         
-        div_tag.setAttribute( 'class', 'messages ' + message_class_type );
-        div_tag.setAttribute( 'title', messages[i].timestamp.toString() );
+        divTag.setAttribute( 'class', 'messages ' + messageClassType );
+        divTag.setAttribute( 'title', messages[i].timestamp.toString() );
 
-        div_tag.innerHTML = messages[i].message;
+        divTag.innerHTML = messages[i].message;
         
-        if ( day_passed( i, messages ) ) {
-            var date_div_tag = document.createElement('div');
+        if ( dayPassed( i, messages ) ) {
+            var dateDivTag = document.createElement('div');
 
-            date_div_tag.setAttribute( 'class', 'message_timestamp' );
+            dateDivTag.setAttribute( 'class', 'message_timestamp' );
 
-            date_div_tag.innerHTML = messages[i].timestamp.toLocaleDateString();
+            dateDivTag.innerHTML = messages[i].timestamp.toLocaleDateString();
 
-            document.getElementById('phone_content').appendChild(date_div_tag);
+            document.getElementById('phone_content').appendChild(dateDivTag);
         }
         
-        document.getElementById('phone_content').appendChild(div_tag);
+        document.getElementById('phone_content').appendChild(divTag);
     }
     
-    populate_messages();
+    populateMessages();
 }
 
-function day_passed( i, messages ) {
+function dayPassed( i, messages ) {
     if ( i == 0 ) {
         return true;
     }
@@ -65,12 +65,12 @@ function day_passed( i, messages ) {
     return false;
 }
 
-function populate_messages() {
+function populateMessages() {
     document.getElementById('phone_content').scrollTop = document.getElementById('phone_content').scrollHeight;
 }
 
-function initializePopulateUi( all_conversations ) {
-    populate_dropdown( Object.keys(all_conversations) );
+function initializePopulateUi( allConversations ) {
+    populateDropdown( Object.keys(allConversations) );
 
-    document.getElementById('contacts').addEventListener('change', function(e){ new_conversation( all_conversations, e) }, false);
+    document.getElementById('contacts').addEventListener('change', function(e){ newConversation(allConversations, e) }, false);
 }
