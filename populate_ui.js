@@ -15,7 +15,11 @@ function populateDropdown( contactNames ) {
     }
 }
 
-function newConversation( allConversations, event ) {
+function newConversation( allConversations, event ) {    
+    if ( event.target.value == 'Choose a contact...' ) {
+        return false;
+    }
+
     document.getElementById('phone_content').innerHTML = '';
     
     loadConversation( allConversations, event.target.value );
