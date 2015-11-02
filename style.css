@@ -25,15 +25,6 @@
 
 }
 
-#phone_bottom_restart_control {
-    width: auto;
-}
-
-#phone_bottom_message_control {
-    width: auto;
-    //margin-left: auto;
-}
-
 #phone_content {
     height: 450px;
     width : 100%;
@@ -54,6 +45,31 @@
     -moz-border-radius   : 0px 0px 10px 10px; 
     -webkit-border-radius: 0px 0px 10px 10px; 
     border               : 10px solid #000000;
+    
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+}
+
+#phone_bottom_restart_control {
+    padding-left: 5px;
+}
+
+#phone_bottom_message_control {
+    text-align: right;
+}
+
+.phone_bottom_controls {
+    -moz-box-flex   : 1;
+    -webkit-box-flex: 1;
+    box-flex        : 1;
+}
+
+.phone_bottom_controls a {
+    font-size     : 1.5em;
+    letter-spacing: 0.5em;
+    
+    cursor: pointer;
 }
 
 #phone_intro {
