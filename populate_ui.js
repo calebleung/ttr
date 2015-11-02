@@ -69,7 +69,7 @@ function populate_messages() {
     document.getElementById('phone_content').scrollTop = document.getElementById('phone_content').scrollHeight;
 }
 
-function initialize_populate_ui( all_conversations ) {
+function initializePopulateUi( all_conversations ) {
     populate_dropdown( Object.keys(all_conversations) );
 
     document.getElementById('contacts').addEventListener('change', function(e){ new_conversation( all_conversations, e) }, false);
