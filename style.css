@@ -35,7 +35,7 @@
     
     background: #cccccc;
     
-    overflow: scroll;
+    overflow: auto;
 }
 
 #phone_bottom {

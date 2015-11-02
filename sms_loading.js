@@ -103,6 +103,11 @@ function getParticipants( htmlDocument ) {
 
     for ( var i = 0; i < participantsHtml.length; i++ ) {
         var phone = participantsHtml[i].getElementsByTagName('a')[0].href.substring(5);
+        
+        // Short codes don't have +'s
+        if ( participantsHtml[i].getElementsByTagName('a')[0].href.indexOf('+') == -1 ) {
+            phone = participantsHtml[i].getElementsByTagName('a')[0].href.substring(4);
+        }
 
         participants.push( {'name': participantsHtml[i].textContent, 'phone': phone} );
     }
@@ -134,24 +139,6 @@ function getTimes( htmlDocument ) {
     return times;
 }
 
-/* format:
-
-var = all_conversations
-{
-key:
-    phonenum,
-    messages:
-        [
-            {
-                sent/received,
-                message,
-                timestamp
-            },
-        ]
-}
-
-
-*/
 function addMessage( thisMessage, participant, message, time ) {
 
     if ( participant.name == 'Me' ) {
