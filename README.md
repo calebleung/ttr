@@ -5,7 +5,7 @@ View your text messages as a conversation to another person instead of individua
 
 ## Instructions
 * You will need to create, download, and extract a [Google Takeout](https://www.google.com/settings/takeout) archive that includes **Voice** data.
-* After downloading a copy of this repo or accessing through [github.io](https://calebleung.github.io/ttr/), select the files you wish to view as conversations. The script ignores non-text files.
+* After downloading a copy of this repo or accessing through [the demo site](https://calebleung.com/ttr/), select the files you wish to view as conversations. The script ignores non-text files.
 * Use the dropdown at the top to select a contact and view the conversation.
 
 ## Misc.
