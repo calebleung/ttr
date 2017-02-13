@@ -25,6 +25,12 @@
     padding: 2%;
 }
 
+#phone_intro a {
+  text-decoration: none;
+  color: #1e88e5;
+  cursor: pointer;
+}
+
 .header {
   background-color: #000000;
   border-radius: 6px 6px 0px 0px;
