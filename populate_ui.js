@@ -29,29 +29,44 @@ function loadConversation( allConversations, contactName ) {
     var messages = allConversations[contactName].messages;
     
     for ( var i = 0; i < messages.length; i++ ) {
-        var messageClassType = 'message_from_you';
-        var divTag           = document.createElement('div');
+        var divContainerTag  = document.createElement('div');
+        var divParticipantTag = document.createElement('div');
+        var dateDivTag = document.createElement('div');
+        
+        var messageClassType = 'is-me';
+        var divTag           = document.createElement('div');        
         
         if ( messages[i].type == 1 ) {
             messageClassType = 'message_to_you';
         }
         
-        divTag.setAttribute( 'class', 'messages ' + messageClassType );
+        divParticipantTag.setAttribute( 'class', 'messageParticipant ' + messageClassType);
+        divContainerTag.setAttribute( 'class', 'messageContainer ' + messageClassType);
+        
+        divParticipantTag.innerHTML = contactName;
+        
+        divTag.setAttribute( 'class', 'messageContent ' + messageClassType );
         divTag.setAttribute( 'title', messages[i].timestamp.toString() );
 
         divTag.innerHTML = messages[i].message;
         
+        if (contactName.indexOf('+') != 0) {
+            divContainerTag.appendChild(divParticipantTag);
+        }
+        divContainerTag.appendChild(divTag);
+        
+        
         if ( dayPassed( i, messages ) ) {
-            var dateDivTag = document.createElement('div');
 
             dateDivTag.setAttribute( 'class', 'message_timestamp' );
 
             dateDivTag.innerHTML = messages[i].timestamp.toLocaleDateString();
-
-            document.getElementById('phone_content').appendChild(dateDivTag);
+            
+            divContainerTag.appendChild(dateDivTag);
         }
         
-        document.getElementById('phone_content').appendChild(divTag);
+        
+        document.getElementById('phone_content').appendChild(divContainerTag);
     }
     
     populateMessages();

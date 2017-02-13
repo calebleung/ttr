@@ -1,0 +1,167 @@
+.phoneFramework {
+  float: left;
+  position: relative;
+  left: 18em;
+  border-radius: 30px;
+  box-shadow: 0px 0px 0px 2px #ccc;
+  background-color: #000000;
+  border-style: solid;
+  border-width: 25px 2px 25px 2px;
+  border-color: #000000;
+  border-radius: 30px;
+}
+
+.phoneContent {
+  width: 400px;
+  height: 680px;
+  background-color: #f8f7ff;
+  
+  overflow: auto;
+}
+
+#phone_intro {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    padding: 2%;
+}
+
+.header {
+  background-color: #000000;
+  border-radius: 6px 6px 0px 0px;
+}
+
+.sectionTitle {
+  color: #ffffff;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #2196f3;
+  border-radius: 6px 6px 0px 0px;  
+  padding: 2%;
+  position: relative;
+  background-color: #1976d2;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+.headerIcons {
+  position: relative;
+  float: right;
+  right: 2%;
+  letter-spacing: 0.25em;
+}
+
+.headerIcons a {
+  cursor: pointer;
+}
+
+.content {
+  position: relative;
+  display: inline;
+}
+
+#placeholder {
+    display: none;
+}
+
+#intro {
+  padding-top: 2%;
+}
+
+#intro a {
+  text-decoration: none;
+  color: #1e88e5;
+}
+
+.introTitle {
+  text-align: center;
+}
+
+.introInstructions {
+  padding: 0 2% 0 2%;
+  font-weight: 300;
+}
+
+.introUpload {
+  padding-left: 8%;
+}
+
+.listMessage {
+  margin: 2%;
+  font-weight: 300;
+}
+
+.listParticipants {
+  font-size: 95%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.listLastMessage {
+  font-size: 85%;
+  padding-top: 0.2%;
+  padding-bottom: 0.5%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.listTimestamp {
+  opacity: 0.6;
+  font-size: 80%;
+}
+
+#messages {
+  overflow: auto;
+  height: 94%;
+}
+
+.messageContainer {
+  margin: 2%;
+  font-weight: 300;
+  display: block;
+}
+
+.messageParticipant {
+  visibility: hidden;
+}
+
+.messageParticipant::first-letter {
+  visibility: visible;
+  background-color: #2196f3;
+  color: #ffffff;
+  font-family: 'Roboto Mono', sans-serif;
+  padding: 3px 9px 3px 9px;
+  border-radius: 15px;
+  font-size: 120%;
+  float: left;
+}
+
+.messageContent {
+  background-color: #2196f3;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 2%;
+  width: 60%;
+  margin-left: 30px;
+
+}
+
+.messageTimestamp, .message_timestamp {
+  font-size: 80%;
+  margin-left: 30px;
+}
+
+.messageParticipant.is-me {
+  display: none;
+}
+
+.messageContent.is-me {
+  margin-left: 135px;
+  background-color: #e8eaf6;
+  color: #000000;
+}
+
+.messageTimestamp.is-me {
+  margin-left: 135px;
+}

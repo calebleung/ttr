@@ -2,28 +2,26 @@
 <html lang='en'>
     <head>
         <title>Takeout Text Reader</title>
-        <link rel='stylesheet' type='text/css' href='./style.css' media='all'/>
+        <link rel='stylesheet' type='text/css' href='./style2.css' media='all'/>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600" rel="stylesheet">   
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300" rel="stylesheet">
     </head>
     <body>
-        <div id='container'>
-            <div id='phone_top'>
-                <div id='phone_top_contacts_dropdown'>
+        <div class='phoneFramework'>
+            <div class='header'>
+                <div class='sectionTitle'>
                     <select name='contacts_dropdown' id='contacts'>
                         <option id='contact_placeholder'>Waiting for contacts...</option>
                     </select>
+                    <div class='headerIcons'>
+                            <a id='phone_control_restart' title='Back to file selection'>&#x21BC;</a>
+                            <a id='messages_to_top' title='To first message'>&#x2191;</a>
+                            <a id='messages_to_bottom' title='To last message'>&#x2193;</a>
+                    </div>
                 </div>
 
             </div>
-            <div id='phone_content'>
-            </div>
-            <div id='phone_bottom'>
-                <div id='phone_bottom_restart_control' class='phone_bottom_controls'>
-                    <a id='phone_control_restart' title='Back to file selection'>&#x21BC;</a>
-                </div>
-                <div id='phone_bottom_message_control' class='phone_bottom_controls'>
-                    <a id='messages_to_top' title='To first message'>&#x2191;</a>
-                    <a id='messages_to_bottom' title='To last message'>&#x2193;</a>
-                </div>
+            <div id='phone_content' class='phoneContent'>
             </div>
         </div>
         

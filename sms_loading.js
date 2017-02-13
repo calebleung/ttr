@@ -7,7 +7,7 @@ function getSmsFiles( files ) {
         }
     }
 
-    document.getElementById('loader_info').innerHTML = 'Conversations loaded. Use the dropdown to select a contact.';
+    document.getElementById('loader_info').innerHTML = 'Conversations loaded. Use the dropdown to select a contact.<br />';
 
     return smsFiles;
 }
@@ -20,52 +20,59 @@ function parseAllSmsData( smsFiles ) {
 
     var allConversations = {};
 
-    for ( var i = 0; i < smsFiles.length; i++ ) {
+    smsFiles.forEach(function(smsFile) {
         var fileReader = new FileReader();
 
-        smsFilenameMetadata.push( getMetadataFromFilename(smsFiles[i].name) );
+        smsFilenameMetadata.push(getMetadataFromFilename(smsFile.name));
 
         fileReader.onloadend = function(event) {
-            if ( event.target.readyState == FileReader.DONE ) {
+            if (event.target.readyState === FileReader.DONE) {
                 var isOngoingConversation = false;
-
-                var participants = [];
-                var messages     = [];
-                var times        = [];
 
                 var smsData = smsAsHtml(event.target.result);
 
-                var smsFilenameAuthor    = smsFilenameMetadata[0].name;
-                //smsFilenameTimestamp = smsFilenameMetadata[0].timestamp;
+                var smsFilenameAuthor = smsFilenameMetadata[0].name;
 
                 smsFilenameMetadata.shift();
 
-                participants = getParticipants(smsData);
-                messages     = getMessages(smsData);
-                times        = getTimes(smsData);
+                var participants = getParticipants(smsData);
+                var messages     = getMessages(smsData);
+                var times        = getTimes(smsData);
+                
+                if (!participants.length) {
+                    document.getElementById('loader_info').innerHTML += '<br />Could not load ' + smsFilenameMetadata[0].name;
+                    fileReaderCounter++;
+                    return;
+                }
+                
+                console.log(participants);
+                console.log(messages);
+                console.log(times);
 
-                isOngoingConversation = existingParticipant( smsFilenameAuthor, participants, allConversations );
+                isOngoingConversation = existingParticipant(smsFilenameAuthor, participants, allConversations);
 
-                if ( isOngoingConversation ) {
-                    allConversations[smsFilenameAuthor] = addMessagesToConversation( allConversations[smsFilenameAuthor], participants, messages, times );
+                if (isOngoingConversation) {
+                    allConversations[smsFilenameAuthor] = addMessagesToConversation(allConversations[smsFilenameAuthor], participants, messages, times);
                 }
                 else {
-                    allConversations[smsFilenameAuthor] = createConversation( participants, messages, times );
+                    allConversations[smsFilenameAuthor] = createConversation(participants, messages, times);
                 }
+                
+                console.log(allConversations[smsFilenameAuthor]);
 
-                if ( fileReaderCounter < smsCount ) {
+                if (fileReaderCounter < smsCount) {
                     fileReaderCounter++;
                 }
                 else {
                     initializePopulateUi(allConversations);
                 }
             }
-        }
+        };
 
         smsCount = smsFilenameMetadata.length;
 
-        var sms = fileReader.readAsText(smsFiles[i]);
-    }
+        var sms = fileReader.readAsText(smsFile);
+    });
 }
 
 function existingParticipant( author, participants, allConversations ) {
@@ -98,6 +105,10 @@ function smsAsHtml( htmlContent ) {
 
 function getParticipants( htmlDocument ) {
     var participantsHtml = htmlDocument.getElementsByTagName('cite');
+    
+    if (!participantsHtml.length) {
+        return false;
+    }
 
     var participants = [];
 
@@ -111,7 +122,7 @@ function getParticipants( htmlDocument ) {
 
         participants.push( {'name': participantsHtml[i].textContent, 'phone': phone} );
     }
-
+    
     return participants;
 }
 
